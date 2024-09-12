@@ -1,6 +1,22 @@
-import React from 'react';
+import React, { useState } from "react";
 import { RiAddLargeFill } from "react-icons/ri";
 const ToDoMenu = () => {
+
+    const [tast, setTask] = useState('');
+    const [list, setList] = useState([]);
+
+    const addTask = () => {
+        if(task){
+            const to_do = {
+                id: list.length+1,
+                title:task,
+                toggle:false
+            }
+
+            setList([to_do, ...list]);
+            setTask('')
+        }
+    }
     return (
         <div className='mx-auto mt-8'>
             <div className='flex items-center justify-center mt-4'>

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { RiAddLargeFill } from "react-icons/ri";
 import { MdDeleteOutline } from "react-icons/md";
-import ReactSwitch from 'react-switch';
+// ReactSwitch: Imports the ReactSwitch component from the 'react-switch' library. It is a custom switch component used for toggling task states.
+import ReactSwitch from "react-switch";
 const ToDoMenu = () => {
 
     const [task, setTask] = useState(''); // setTask is the function to update task.

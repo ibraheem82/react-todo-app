@@ -11,12 +11,12 @@ const ToDoMenu = () => {
     const addTask = () => {
         if(task){
             const to_do = {
-                id: list.length+1, // it will start from zero because it is in form of an array, that is why 1 is been added
-                title:task,
-                toggle:false
-            }
+        id: list.length + 1, // it will start from zero because it is in form of an array, that is why 1 is been added
+        title: task,
+        toggle: false,
+      };
 
-            setList([to_do, ...list]); // Updates the list state by adding the new task to the beginning of the array.
+      setList([to_do, ...list]); // Updates the list state by adding the new task to the beginning of the array.
             setTask('') // Clears the task input field.
         }
     }

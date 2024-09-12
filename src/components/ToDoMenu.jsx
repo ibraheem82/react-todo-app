@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { RiAddLargeFill } from "react-icons/ri";
+import { MdDeleteOutline } from "react-icons/md";
+import ReactSwitch from 'react-switch';
 const ToDoMenu = () => {
 
-    const [tast, setTask] = useState('');
+    const [task, setTask] = useState('');
     const [list, setList] = useState([]);
 
     const addTask = () => {
         if(task){
             const to_do = {
-                id: list.length+1,
+                id: list.length+1, // it will start from zero because it is in form of an array, that is why 1 is been added
                 title:task,
                 toggle:false
             }
@@ -17,7 +19,9 @@ const ToDoMenu = () => {
             setTask('')
         }
     }
-    return (
+
+    console.log(list)
+  return (
     <div className="mx-auto mt-8">
       <div className="flex items-center justify-center mt-4">
         <input
@@ -31,8 +35,22 @@ const ToDoMenu = () => {
           <RiAddLargeFill />
         </button>
       </div>
+
+      <div className="flex flex-col items-center">
+        <div className={`${list.length>0 && 'bg-gradient-to-r from-sky-500 via bg-indigo-100 to-pink-100 pt-2 pl-2 pr-2'}`}>
+            {list.length===0 ? <h1 className="font-bold text-3xl text-purple-700 p-2">Add Tasks</h1>:
+            list.map((task) => (
+                <div>
+                    <h4>{task.title}</h4>
+                    <button><MdDeleteOutline /></button>
+                    <ReactSwitch />
+                </div>
+            ))
+            }
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default ToDoMenu;

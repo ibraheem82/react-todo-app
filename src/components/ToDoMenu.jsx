@@ -4,7 +4,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import ReactSwitch from 'react-switch';
 const ToDoMenu = () => {
 
-    const [task, setTask] = useState('');
+    const [task, setTask] = useState(''); // setTask is the function to update task.
     const [list, setList] = useState([]);
 
     const addTask = () => {
@@ -15,12 +15,26 @@ const ToDoMenu = () => {
                 toggle:false
             }
 
-            setList([to_do, ...list]);
-            setTask('')
+            setList([to_do, ...list]); // Updates the list state by adding the new task to the beginning of the array.
+            setTask('') // Clears the task input field.
         }
     }
 
-    console.log(list)
+    // console.log(list)
+
+    const deleteTask = (id) => { // deleteTask is a function that removes a task from the list based on its id.
+        const filtered = list.filter((task) => task.id !== id)
+        setList(filtered) // It filters out the task with the matching id and updates the list state.
+    }
+
+
+    const toggleTask = (id) => { //toggleTask is a function that toggles the toggle status of a task.
+      const updatedTask = list.map((task) => 
+        task.id === id ? {...task, toggle:!task.toggle} : task
+      ) // It maps through the list and updates the toggle status of the task with the matching id.
+
+      setList(updatedTask) // Updates the list state with the modified tasks.
+    }
   return (
     <div className="mx-auto mt-8">
       <div className="flex items-center justify-center mt-4">
@@ -44,7 +58,9 @@ const ToDoMenu = () => {
                 key = {task.id}
                 >
                     <h4 className={`flex-grow ${task.toggle?'line-through':''}`}> {task.title}</h4>
-                    <button className="text-red-600 font-bold text-xl py-1 px-2 rounded"><MdDeleteOutline /></button>
+                    <button 
+                    className="text-red-600 font-bold text-xl py-1 px-2 rounded" 
+                    onClick={()=>deleteTask(task.id)}><MdDeleteOutline /></button>
                     <ReactSwitch checked={task.toggle}
                     height={20}
                     width={40}
@@ -53,6 +69,7 @@ const ToDoMenu = () => {
                     offColor="#ccc" 
                     checkedIcon={false}
                     uncheckedIcon={false}
+                    onChange={()=>toggleTask(task.id)}
                     />
 
                 </div>

@@ -40,10 +40,21 @@ const ToDoMenu = () => {
         <div className={`${list.length>0 && 'bg-gradient-to-r from-sky-500 via bg-indigo-100 to-pink-100 pt-2 pl-2 pr-2'}`}>
             {list.length===0 ? <h1 className="font-bold text-3xl text-purple-700 p-2">Add Tasks</h1>:
             list.map((task) => (
-                <div>
-                    <h4>{task.title}</h4>
-                    <button><MdDeleteOutline /></button>
-                    <ReactSwitch />
+                <div className={` flex w-[350px] text-md font-bold item-center space-x-2 bg-gray-200 p-2 rounded-md mb-2 ${task.toggle ? 'bg-green-800 text-cyan-50' : 'bg-violet-500'}`}
+                key = {task.id}
+                >
+                    <h4 className={`flex-grow ${task.toggle?'line-through':''}`}> {task.title}</h4>
+                    <button className="text-red-600 font-bold text-xl py-1 px-2 rounded"><MdDeleteOutline /></button>
+                    <ReactSwitch checked={task.toggle}
+                    height={20}
+                    width={40}
+                    handleDiameter={18} 
+                    onColor="#4299e1"
+                    offColor="#ccc" 
+                    checkedIcon={false}
+                    uncheckedIcon={false}
+                    />
+
                 </div>
             ))
             }
